@@ -41,7 +41,7 @@ public class Robot extends IterativeRobot {
 		compressor = new CompressorSystem();
 		anglePistons = new AnglePistons();
 		oi =  new OI();
-//		CameraServer.getInstance().startAutomaticCapture(0);
+		CameraServer.getInstance().startAutomaticCapture(0);
 		ArduinoDueInterface.init();
 		
 

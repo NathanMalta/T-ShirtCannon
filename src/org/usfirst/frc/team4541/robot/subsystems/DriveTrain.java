@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Joystick.AxisType;
-import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -18,13 +18,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4541.robot.Robot;
 import org.usfirst.frc.team4541.robot.commands.TankDriveWithJoystick;
 
-import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Joystick.AxisType;
-import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -37,23 +36,22 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4541.robot.Robot;
 import org.usfirst.frc.team4541.robot.commands.TankDriveWithJoystick;
 
-import com.ctre.CANTalon;
-
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 /**
  * The DriveTrain subsystem incorporates the sensors and actuators attached to
  * the robots chassis. These include four drive motors, a left and right encoder
  * and a gyro.
  */
 public class DriveTrain extends Subsystem {
-	private SpeedController frontLeftMotor = new CANTalon(3);
-	private SpeedController rearLeftMotor = new CANTalon(1);
-	private SpeedController frontRightMotor = new CANTalon(4);
-	private SpeedController rearRightMotor = new CANTalon(2);
+	private WPI_TalonSRX frontLeftMotor = new WPI_TalonSRX(3);
+	private WPI_TalonSRX rearLeftMotor = new WPI_TalonSRX(1);
+	private WPI_TalonSRX frontRightMotor = new WPI_TalonSRX(4);
+	private WPI_TalonSRX rearRightMotor = new WPI_TalonSRX(2);
 	public static PowerDistributionPanel panel = new PowerDistributionPanel(0);
 
-	private RobotDrive drive = new RobotDrive(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
+	private DifferentialCANDrive drive = new DifferentialCANDrive(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
 
 	private AnalogGyro gyro = new AnalogGyro(1);
 	
