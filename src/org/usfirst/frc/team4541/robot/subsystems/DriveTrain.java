@@ -97,7 +97,7 @@ public class DriveTrain extends Subsystem {
 	 *            The ps3 style joystick to use to drive tank style.
 	 */
 	public void drive(Joystick joy) {
-		this.drive(-joy.getRawAxis(4), joy.getRawAxis(1));
+		this.drive(joy.getRawAxis(4), -joy.getRawAxis(1));
 	}
 
 

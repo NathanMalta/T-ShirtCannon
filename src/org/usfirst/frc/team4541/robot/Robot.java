@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4541.robot;
 
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -35,15 +36,18 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		UsbCamera cam0 = CameraServer.getInstance().startAutomaticCapture(0);
+
+//		cam0.setWhiteBalanceAuto();
+//		cam0.setExposureManual(50);
+//		cam0.setFPS(20);
+		cam0.setResolution(1000, (int)(1000*(9.0/16.0)));
 		// Initialize all subsystems
 		drivetrain = new DriveTrain(); 
 		launcher   = new TShirtSolenoid();
 		compressor = new CompressorSystem();
 		anglePistons = new AnglePistons();
 		oi =  new OI();
-		CameraServer.getInstance().startAutomaticCapture(0);
-		ArduinoDueInterface.init();
-		
 
 		// Show what command your subsystem is running on the SmartDashboard
 //		SmartDashboard.putData(drivetrain);
@@ -95,15 +99,6 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Total Joules", DriveTrain.panel.getTotalEnergy());
 		SmartDashboard.putNumber("Pressure Transducer Voltage", CompressorSystem.pressureTransducer.getVoltage());
 		SmartDashboard.putNumber("Pressure Transducer Pressure", 250*(CompressorSystem.pressureTransducer.getVoltage()/4.5977)-25);
-
-		SmartDashboard.putNumber("U1", ArduinoDueInterface.getUltrasonic(1));
-		SmartDashboard.putNumber("U2", ArduinoDueInterface.getUltrasonic(2));
-		SmartDashboard.putNumber("U3", ArduinoDueInterface.getUltrasonic(3));
-		SmartDashboard.putNumber("U4", ArduinoDueInterface.getUltrasonic(4));
-		
-		SmartDashboard.putNumber("U3 AVG", ArduinoDueInterface.getUltrasonicAvg());
-		
-		SmartDashboard.putBoolean("isDueOnline:", ArduinoDueInterface.isDueOnline());
 
 	}
 }
